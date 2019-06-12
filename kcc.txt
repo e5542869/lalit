@@ -1,0 +1,186 @@
+Here are RDP details
+IP Address:134.119.221.86
+Username - venkat
+Password - P@$$w0rd@222
+
+Here is website url 
+http://www.kccsaccounts.com 
+
+http://localhost:49329/WebAPI/AccountsAppAPI.asmx
+
+We use following url for development purpose 
+Http://dev.kccsaccounts.com
+
+User : 300010
+pass : waheguruji 
+meenakshi7087
+..........
+
+https://www.youtube.com/watch?v=1yY6IEWb0zI&list=RDzxHRqFsQ4E0&index=3
+.............................
+KhalsaAccountsWeb
+AccountsWeb@2019
+
+.......................
+
+108.166.181.121,1433
+
+KhalsaAccounts
+P@$$w0rd@222
+
+Airnb
+12019052581812
+
+11899/Singh@123
+.................
+
+http://page.kccsaccounts.com/ 
+FTP Server name - 108.166.181.121
+FTP user - kccpagesftpuser1
+FTP Pwd - Sende!34%6
+......................................................
+FTP Server name - 108.166.181.121
+User - devkccftpuser1
+Password - P@$$w0rd@222
+Here are FTP details for dev site, please upload dev site and let me know when this is done 
+
+............................
+
+main site
+FTP Server name - 108.166.181.121
+User - kccaccountsuser1
+Password - P@$$w0rd@222
+
+.....................................................
+Login sp
+
+[LoginGetDefaultValuesForCurrentUser]
+
+LoginGetDefaultValuesForCurrentUser
+
+.....
+
+voucher type : payment
+voucher no :  1/27.4.2019/300010
+
+
+voucher type : payment
+voucher no :  1694/30.3.2019/300010
+
+1692/6.3.2019/300010
+
+
+...............
+
+$('#dvNewLedgerInfo').css('display', 'none');
+$('#dvAddTransaction').css('display', 'none');
+
+
+#txtDate
+
+..........................................
+
+
+---- EXEC [Accounts].[AccountLedgerForTransaction] 0,300010,0,4
+
+CREATE proc  [Accounts].[AccountLedgerForTransaction]  
+(
+@GroupId int,
+@InstId int,
+@DepartmentId int,
+@FinancialYearId int
+)
+AS  
+
+SELECT InstId,LedgerId,AccountGroupId,LedgerName,LedgerNameAlias,LedgerNamePrint,IsAdminLedger,
+IsDefault,CrOrDr,Narration,Address,Phone,Mobile,Email,TIN,CST,PAN,AccountGroupName,
+CONVERT(DECIMAL(17,2), IsNull(OB_OpeningBalance,0)) as OpeningBalance,IsNull(OB_CrOrDr,CrOrDr) as OB_CrOrDr,
+ForInstId,Inst_ShortTitle,Inst_Title,IsUnderSecretary 
+FROM Accounts.vAccountLedger  
+LEFT JOIN Accounts.AccountLedgerOpeningBalance ON  OB_InstId=@InstId
+AND OB_LedgerId=Ledgerid AND OB_FinancialYearId=@FinancialYearId AND ForInstId=ob_ForInstId
+WHERE InstId=@InstId
+ORDER BY LedgerName
+
+
+select * from Accounts.vAccountLedger order by insertdate desc
+
+
+select * from Accounts.AccountLedgerOpeningBalance order by ob_insertdate desc
+
+....................................................
+
+
+CREATE PROC [Accounts].[TransactionNotificationInsert]
+(
+@TMId int,
+@InstId int
+)
+as
+  
+INSERT INTO Accounts.TransactionNotification(FromInstId,ToInstId,TMId,LedgerId,IsPost)
+select @InstId,al.NotificationToInstId,TransactionMasterId,td.LedgerId,0 from Accounts.vTransactionDetails AS TD
+INNER JOIN Accounts.AccountLedger AS AL ON AL.LedgerId=TD.LedgerId AND AL.InstId=TD.InstId
+where TransactionMasterId=@TMId AND Isnull(al.NotificationToInstId,0)>0
+
+
+
+
+select top 100 *  from Accounts.vTransactionDetails order by transactiondate desc
+select * from accounts.TransactionNotification order by insertdate desc
+
+
+..............................
+
+select * from useraccount where ua_accountname='300010';
+
+
+select * from useraccount where ua_accountpasswordhint;
+
+select * from Accounts.Transactionnotification order by insertdate desc
+
+select * from userdetail
+
+select * from transactionmodificationlogs
+
+
+sp_helptext [Accounts.TransactionNotificationInsert]
+
+exec Accounts.TransactionNotificationInsert @TMId=184812,@InstId=300010
+
+sp_helptext [Accounts.AccountLedgerForTransaction]
+
+
+20011
+
+
+select top 100 * from Accounts.vTransactionDetails order by transactiondate desc
+
+
+
+select * from Accounts.vTransactionDetails where transactiondate='2019-03-30 00:00:00:000';
+
+select * from Accounts.Transactionnotification order by insertdate desc --8572
+
+select * from master
+
+select * from vouchertype
+
+select top 100 * from accounts.transactionmaster where voucherno='1694/30.3.2019/300010';
+
+select top 100 * from accounts.transactionmaster where voucherno='124/30.3.2019/300010';
+574/30.3.2019/300010
+select top 100 * from accounts.transactionmaster where masternarration='test for current year1';
+
+
+select top 100 * from accounts.transactionmaster where voucherno='574/30.3.2019/300010';--184829
+
+select top 100  * from accounts.transactiondetails order by transactionmasterid desc
+
+2019-03-30 00:00:00.000
+
+update accounts.transactionmaster set transactiondate='2019-03-30 00:00:00.000' where masternarration='test for current year1';
+
+---update accounts.transactionmaster set voucherno='574/30.3.2019/300010' where masternarration='test for current year1';
+
+
